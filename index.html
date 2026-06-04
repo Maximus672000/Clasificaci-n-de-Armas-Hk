@@ -1,0 +1,345 @@
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&family=IM+Fell+English:ital@0;1&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+.hk{
+  background:radial-gradient(ellipse at 35% 15%,#0d1e3a 0%,#060f1f 45%,#020609 100%);
+  min-height:100vh;
+  font-family:'Cinzel',Georgia,serif;
+  color:#c8d8f0;
+  position:relative;
+  overflow:hidden;
+}
+.stars-bg{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:0;}
+.star{position:absolute;background:#fff;border-radius:50%;animation:twinkle linear infinite;}
+@keyframes twinkle{0%,100%{opacity:.15;}50%{opacity:.85;}}
+
+.corner{position:absolute;z-index:2;pointer-events:none;}
+.corner.tl{top:10px;left:10px;}
+.corner.tr{top:10px;right:10px;transform:scaleX(-1);}
+.corner.bl{bottom:10px;left:10px;transform:scaleY(-1);}
+.corner.br{bottom:10px;right:10px;transform:scale(-1,-1);}
+
+.hk-wrap{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:0 16px 60px;}
+
+.hk-head{text-align:center;padding:48px 16px 18px;}
+.hk-icon{display:block;margin:0 auto 14px;}
+.hk-title{
+  font-family:'Cinzel Decorative',serif;
+  font-size:clamp(14px,3.5vw,30px);
+  font-weight:700;color:#eef3ff;
+  letter-spacing:2px;margin:0 0 6px;
+  line-height:1.3;
+}
+.hk-sub{
+  font-size:clamp(9px,1.2vw,11px);
+  color:rgba(170,195,235,.5);
+  letter-spacing:4px;text-transform:uppercase;
+}
+.divider{display:block;margin:16px auto;width:100%;max-width:480px;}
+.hint{
+  text-align:center;
+  font-size:clamp(10px,1.2vw,11px);
+  color:rgba(170,195,235,.38);
+  letter-spacing:2px;
+  padding:6px 0 10px;
+}
+
+.rank-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:9px;
+  padding:0 0 10px;
+}
+
+.rank-card{
+  border:1px solid rgba(170,200,255,.18);
+  border-radius:10px;
+  padding:14px 10px 12px;
+  text-align:center;cursor:pointer;
+  transition:all .22s ease;
+  background:rgba(8,18,42,.55);
+  position:relative;overflow:hidden;
+  min-height:76px;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:5px;
+}
+.rank-card::after{
+  content:'';position:absolute;inset:0;
+  opacity:0;transition:opacity .22s;pointer-events:none;
+}
+.rank-card:hover::after,.rank-card.active::after{opacity:1;}
+.rank-card.active{border-width:1.5px;}
+
+.r-badge{
+  display:inline-block;
+  font-size:9px;letter-spacing:2px;
+  opacity:.6;line-height:1;
+  border:1px solid currentColor;
+  border-radius:3px;padding:2px 5px;
+  margin-bottom:2px;
+}
+.r-name{
+  font-size:14px;
+  font-weight:600;line-height:1.2;
+  text-shadow:0 0 10px currentColor;
+}
+
+.r9-solo{grid-column:1/-1;}
+
+.r1{color:#c8b89a;}
+.r1.active{border-color:#c8b89a;box-shadow:inset 0 0 18px rgba(200,184,154,.1),0 0 12px rgba(200,184,154,.25);}
+.r1::after{background:radial-gradient(ellipse at center,rgba(200,184,154,.08),transparent 70%);}
+.r2{color:#b0c8d8;}
+.r2.active{border-color:#b0c8d8;box-shadow:inset 0 0 18px rgba(176,200,216,.1),0 0 12px rgba(176,200,216,.25);}
+.r2::after{background:radial-gradient(ellipse at center,rgba(176,200,216,.08),transparent 70%);}
+.r3{color:#a8d8a8;}
+.r3.active{border-color:#a8d8a8;box-shadow:inset 0 0 18px rgba(168,216,168,.1),0 0 12px rgba(168,216,168,.25);}
+.r3::after{background:radial-gradient(ellipse at center,rgba(168,216,168,.08),transparent 70%);}
+.r4{color:#c8a8e8;}
+.r4.active{border-color:#c8a8e8;box-shadow:inset 0 0 18px rgba(200,168,232,.1),0 0 12px rgba(200,168,232,.25);}
+.r4::after{background:radial-gradient(ellipse at center,rgba(200,168,232,.08),transparent 70%);}
+.r5{color:#e8c878;}
+.r5.active{border-color:#e8c878;box-shadow:inset 0 0 18px rgba(232,200,120,.1),0 0 12px rgba(232,200,120,.25);}
+.r5::after{background:radial-gradient(ellipse at center,rgba(232,200,120,.08),transparent 70%);}
+.r6{color:#d8eaff;}
+.r6.active{border-color:#d8eaff;box-shadow:inset 0 0 20px rgba(216,234,255,.12),0 0 14px rgba(216,234,255,.3);}
+.r6::after{background:radial-gradient(ellipse at center,rgba(216,234,255,.1),transparent 70%);}
+.r7{color:#b8b8f0;}
+.r7.active{border-color:#b8b8f0;box-shadow:inset 0 0 20px rgba(184,184,240,.12),0 0 16px rgba(184,184,240,.3);}
+.r7::after{background:radial-gradient(ellipse at center,rgba(184,184,240,.1),transparent 70%);}
+.r8{color:#f8a060;}
+.r8.active{border-color:#f8a060;box-shadow:inset 0 0 22px rgba(248,160,96,.12),0 0 18px rgba(248,160,96,.32);}
+.r8::after{background:radial-gradient(ellipse at center,rgba(248,160,96,.09),transparent 70%);}
+.r9{color:#ffdf7a;}
+.r9.active{border-color:#ffdf7a;box-shadow:inset 0 0 26px rgba(255,223,122,.16),0 0 22px rgba(255,223,122,.4);}
+.r9::after{background:radial-gradient(ellipse at center,rgba(255,223,122,.14),transparent 70%);}
+
+.detail{
+  margin:12px 0 0;
+  border:1px solid rgba(170,200,255,.16);
+  border-radius:12px;
+  background:rgba(4,12,30,.8);
+  overflow:hidden;display:none;
+}
+.detail.open{display:block;}
+
+.d-head{
+  padding:16px 18px 12px;
+  border-bottom:1px solid rgba(170,200,255,.12);
+  position:relative;
+  display:flex;flex-direction:column;gap:3px;
+}
+.d-num{font-size:10px;letter-spacing:3px;opacity:.55;}
+.d-name{
+  font-family:'Cinzel Decorative',serif;
+  font-size:clamp(17px,3vw,26px);
+  font-weight:700;line-height:1.2;
+}
+.d-close{
+  position:absolute;top:12px;right:12px;
+  background:rgba(170,200,255,.06);
+  border:1px solid rgba(170,200,255,.18);
+  color:rgba(170,200,255,.55);
+  border-radius:6px;width:34px;height:34px;
+  cursor:pointer;font-size:16px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:sans-serif;
+}
+.d-close:hover{background:rgba(170,200,255,.14);color:#fff;}
+
+.d-body{
+  padding:16px 18px;
+  font-family:'IM Fell English',Georgia,serif;
+  font-size:clamp(13px,1.5vw,15px);
+  line-height:1.82;
+  color:rgba(195,218,255,.82);
+}
+.d-body p{margin:0 0 11px;}
+.d-body p:last-child{margin:0;}
+
+.d-foot{
+  display:flex;align-items:center;gap:10px;
+  padding:0 18px 16px;opacity:.3;
+}
+.d-foot::before,.d-foot::after{
+  content:'';flex:1;height:1px;
+  background:rgba(200,220,255,.5);
+}
+.d-foot span{font-size:10px;letter-spacing:3px;}
+
+.desktop-only{display:none;}
+</style>
+
+<div class="hk">
+  <div class="stars-bg" id="stars"></div>
+
+  <svg class="corner tl" width="58" height="58" viewBox="0 0 58 58" fill="none">
+    <path d="M5 5 L5 30 Q5 35 10 35 L30 35" stroke="rgba(200,220,255,.65)" stroke-width="1.4" fill="none"/>
+    <circle cx="5" cy="5" r="3" fill="none" stroke="rgba(200,220,255,.65)" stroke-width="1.2"/>
+    <circle cx="5" cy="5" r="1.3" fill="rgba(200,220,255,.55)"/>
+    <path d="M13 5 Q21 13 16 22 Q12 29 20 32" stroke="rgba(200,220,255,.28)" stroke-width=".9" fill="none"/>
+  </svg>
+  <svg class="corner tr" width="58" height="58" viewBox="0 0 58 58" fill="none">
+    <path d="M5 5 L5 30 Q5 35 10 35 L30 35" stroke="rgba(200,220,255,.65)" stroke-width="1.4" fill="none"/>
+    <circle cx="5" cy="5" r="3" fill="none" stroke="rgba(200,220,255,.65)" stroke-width="1.2"/>
+    <circle cx="5" cy="5" r="1.3" fill="rgba(200,220,255,.55)"/>
+    <path d="M13 5 Q21 13 16 22 Q12 29 20 32" stroke="rgba(200,220,255,.28)" stroke-width=".9" fill="none"/>
+  </svg>
+  <svg class="corner bl" width="58" height="58" viewBox="0 0 58 58" fill="none">
+    <path d="M5 5 L5 30 Q5 35 10 35 L30 35" stroke="rgba(200,220,255,.65)" stroke-width="1.4" fill="none"/>
+    <circle cx="5" cy="5" r="3" fill="none" stroke="rgba(200,220,255,.65)" stroke-width="1.2"/>
+    <circle cx="5" cy="5" r="1.3" fill="rgba(200,220,255,.55)"/>
+  </svg>
+  <svg class="corner br" width="58" height="58" viewBox="0 0 58 58" fill="none">
+    <path d="M5 5 L5 30 Q5 35 10 35 L30 35" stroke="rgba(200,220,255,.65)" stroke-width="1.4" fill="none"/>
+    <circle cx="5" cy="5" r="3" fill="none" stroke="rgba(200,220,255,.65)" stroke-width="1.2"/>
+    <circle cx="5" cy="5" r="1.3" fill="rgba(200,220,255,.55)"/>
+  </svg>
+
+  <div class="hk-wrap">
+    <div class="hk-head">
+      <svg class="hk-icon" width="60" height="42" viewBox="0 0 60 42" fill="none">
+        <ellipse cx="30" cy="13" rx="10.5" ry="10.5" fill="none" stroke="rgba(200,225,255,.6)" stroke-width="1.2"/>
+        <ellipse cx="30" cy="13" rx="5.2" ry="5.2" fill="rgba(200,225,255,.1)" stroke="rgba(200,225,255,.42)" stroke-width=".85"/>
+        <circle cx="30" cy="13" r="1.9" fill="rgba(200,225,255,.48)"/>
+        <path d="M3 29 Q16 21 30 25 Q44 21 57 29" stroke="rgba(200,225,255,.58)" stroke-width="1.1" fill="none"/>
+        <path d="M7 29 Q18 37 30 33 Q42 37 53 29" stroke="rgba(200,225,255,.32)" stroke-width=".85" fill="none"/>
+      </svg>
+      <div class="hk-title">Clasificaci&#243;n de Armas</div>
+      <div class="hk-sub">Armas &amp; Artefactos &middot; Hollow Kingdom</div>
+    </div>
+
+    <svg class="divider" height="20" viewBox="0 0 480 20" fill="none">
+      <line x1="0" y1="10" x2="480" y2="10" stroke="rgba(200,220,255,.1)" stroke-width=".7"/>
+      <path d="M80 10 Q150 3 200 10 Q240 15 280 10 Q330 3 400 10" stroke="rgba(200,220,255,.48)" stroke-width="1.05" fill="none"/>
+      <circle cx="240" cy="10" r="3.2" fill="none" stroke="rgba(200,220,255,.55)" stroke-width=".9"/>
+      <circle cx="240" cy="10" r="1.3" fill="rgba(200,220,255,.48)"/>
+      <path d="M55 10 Q67 5 80 10" stroke="rgba(200,220,255,.35)" stroke-width=".85" fill="none"/>
+      <path d="M400 10 Q413 5 425 10" stroke="rgba(200,220,255,.35)" stroke-width=".85" fill="none"/>
+    </svg>
+
+    <div class="hint">&#8212; Selecciona un rango para explorar &#8212;</div>
+
+    <div class="rank-grid" id="grid">
+      <div class="rank-card r1" onclick="sel(1)" id="p1">
+        <span class="r-badge">RANGO I</span>
+        <div class="r-name">Coraza</div>
+      </div>
+      <div class="rank-card r2" onclick="sel(2)" id="p2">
+        <span class="r-badge">RANGO II</span>
+        <div class="r-name">Acero</div>
+      </div>
+      <div class="rank-card r3" onclick="sel(3)" id="p3">
+        <span class="r-badge">RANGO III</span>
+        <div class="r-name">Armon&#237;a</div>
+      </div>
+      <div class="rank-card r4" onclick="sel(4)" id="p4">
+        <span class="r-badge">RANGO IV</span>
+        <div class="r-name">Consagrado</div>
+      </div>
+      <div class="rank-card r5" onclick="sel(5)" id="p5">
+        <span class="r-badge">RANGO V</span>
+        <div class="r-name">Ascendido</div>
+      </div>
+      <div class="rank-card r6" onclick="sel(6)" id="p6">
+        <span class="r-badge">RANGO VI</span>
+        <div class="r-name">P&#225;lido</div>
+      </div>
+      <div class="rank-card r7" onclick="sel(7)" id="p7">
+        <span class="r-badge">RANGO VII</span>
+        <div class="r-name">Vac&#237;o</div>
+      </div>
+      <div class="rank-card r8" onclick="sel(8)" id="p8">
+        <span class="r-badge">RANGO VIII</span>
+        <div class="r-name">Radiante</div>
+      </div>
+      <div class="rank-card r9 r9-solo" onclick="sel(9)" id="p9">
+        <span class="r-badge">RANGO IX</span>
+        <div class="r-name">Reliquia</div>
+      </div>
+    </div>
+
+    <div class="detail" id="detail">
+      <div class="d-head">
+        <div class="d-num" id="dn"></div>
+        <div class="d-name" id="dd"></div>
+        <button class="d-close" onclick="cls()" aria-label="Cerrar">&#10005;</button>
+      </div>
+      <div class="d-body" id="db"></div>
+      <div class="d-foot"><span>&#10022;</span></div>
+    </div>
+
+    <svg class="divider" height="20" viewBox="0 0 480 20" fill="none" style="margin-top:16px;">
+      <path d="M80 10 Q150 3 200 10 Q240 15 280 10 Q330 3 400 10" stroke="rgba(200,220,255,.48)" stroke-width="1.05" fill="none"/>
+      <circle cx="240" cy="10" r="3.2" fill="none" stroke="rgba(200,220,255,.55)" stroke-width=".9"/>
+      <circle cx="240" cy="10" r="1.3" fill="rgba(200,220,255,.48)"/>
+    </svg>
+  </div>
+</div>
+
+<script>
+const D=[
+  {n:"Coraza",c:"#c8b89a",l:"RANGO I",t:["Armas fabricadas con materiales comunes y corrientes, sin propiedades m&#225;gicas ni tratamientos especiales.","No poseen bendiciones, sellos, adoraciones ni procesos complejos. Son armas funcionales, creadas &#250;nicamente mediante m&#233;todos tradicionales de forja."]},
+  {n:"Acero",c:"#b0c8d8",l:"RANGO II",t:["Armas elaboradas con materiales comunes, pero trabajados con gran maestr&#237;a y dedicaci&#243;n.","Pueden incluir procesos de refinamiento, sellos b&#225;sicos o t&#233;cnicas que aumentan su dureza, filo y capacidad letal. Aunque carecen de gran poder m&#225;gico, destacan por la calidad excepcional de su fabricaci&#243;n."]},
+  {n:"Armon&#237;a",c:"#a8d8a8",l:"RANGO III",t:["Armas creadas con materiales raros, o con materiales comunes sometidos a tratamientos de alto nivel.","Estos tratamientos pueden incluir inmersiones prolongadas en alma, runas on&#237;ricas, sellos de seda o bendiciones otorgadas por seres de considerable poder m&#225;gico.","Los materiales empleados provienen de criaturas excepcionalmente peligrosas: baldurs, mantis veteranas, devotos acechadores y otros insectos de gran afinidad m&#225;gica.","Las propiedades obtenidas pueden superar ampliamente las capacidades naturales del material original."]},
+  {n:"Consagrado",c:"#c8a8e8",l:"RANGO IV",t:["Armas formadas mediante aleaciones entre materiales comunes y raros, reforzadas con peque&#241;as cantidades de materiales superiores como el mineral p&#225;lido.","Tambi&#233;n pertenecen aqu&#237; armas con materiales raros trabajados con t&#233;cnicas similares al Rango III.","Ciertos materiales de este nivel pueden encontrarse en dominios de dioses menores o entidades terrenales de gran poder."]},
+  {n:"Ascendido",c:"#e8c878",l:"RANGO V",t:["Considerada la c&#250;spide de las armas creadas principalmente con materiales naturales.","Suelen fabricarse con materiales extremadamente raros, aleaciones con fragmentos de dioses, o mediante t&#233;cnicas milenarias de forja y refinamiento.","Las armas de acero colmena pertenecen a este rango. Se acercan al nivel de poder asociado a los seres p&#225;lidos."]},
+  {n:"P&#225;lido",c:"#d8eaff",l:"RANGO VI",t:["Aqu&#237; se encuentran materiales como el mineral p&#225;lido y armas legendarias como el Aguij&#243;n Puro.","Las armas de este rango se fabrican directamente con materiales relacionados a seres p&#225;lidos o provenientes de sus dominios.","Tambi&#233;n pueden incluir armas de rangos inferiores mejoradas excepcionalmente, como un aguij&#243;n de acero colmena refinado hasta convertirse en acero p&#225;lido."]},
+  {n:"Vac&#237;o",c:"#b8b8f0",l:"RANGO VII",t:["Armas creadas mediante aleaciones entre materiales divinos de distintos or&#237;genes, o reforzadas con enormes cantidades de sellos, alma u energ&#237;a on&#237;rica.","El poder m&#225;gico contenido resulta abrumador para la mayor&#237;a de los insectos comunes, quienes dif&#237;cilmente pueden usarlas sin sufrir da&#241;os o perder el control.","Cada arma de este rango posee alguna cualidad o afinidad m&#225;gica propia."]},
+  {n:"Radiante",c:"#f8a060",l:"RANGO VIII",t:["Armas y artefactos clasificados por poseer propiedades &#250;nicas o capacidades excepcionales dentro del reino, independientemente de sus materiales.","Destacan por habilidades irremplazables: romper sellos on&#237;ricos, acceder a dominios espirituales, extraer o manipular alma, alterar la voluntad de insectos, e interactuar con fuerzas superiores o antiguas.","Muchas de estas capacidades son imposibles de reproducir incluso con materiales de rangos superiores. El Aguij&#243;n On&#237;rico pertenece a esta clasificaci&#243;n."]},
+  {n:"Reliquia",c:"#ffdf7a",l:"RANGO IX",t:["Armas y artefactos de existencia excepcional o irrepetible. No son clasificados por sus materiales o poder, sino por representar fen&#243;menos &#250;nicos capaces de alterar leyes naturales, espirituales o conceptos ligados al alma y al vac&#237;o.","Su funcionamiento resulta incomprensible para la mayor&#237;a de los seres vivos. S&#243;lo entidades equivalentes a seres p&#225;lidos o superiores pueden utilizar todo su potencial.","Estas reliquias pueden poseer m&#250;ltiples habilidades innatas, voluntad propia, v&#237;nculos directos con dioses, o capacidades imposibles de recrear mediante forja convencional."]}
+];
+
+function applyLayout(){
+  const grid=document.getElementById('grid');
+  const body=document.getElementById('db');
+  const p9=document.getElementById('p9');
+  const isWide=window.innerWidth>=620;
+  grid.style.gridTemplateColumns=isWide?'repeat(3,minmax(0,1fr))':'repeat(2,minmax(0,1fr))';
+  grid.style.gap=isWide?'12px':'9px';
+  p9.style.gridColumn=isWide?'auto':'1 / -1';
+  if(body){body.style.columns=isWide?'2':'1';body.style.columnGap=isWide?'28px':'0';}
+  document.querySelectorAll('.r-name').forEach(el=>{el.style.fontSize=isWide?'clamp(13px,1.6vw,15px)':'14px';});
+}
+
+applyLayout();
+window.addEventListener('resize',applyLayout);
+
+let cur=null;
+function sel(i){
+  const d=D[i-1];
+  document.querySelectorAll('.rank-card').forEach(c=>c.classList.remove('active'));
+  document.getElementById('p'+i).classList.add('active');
+  document.getElementById('dn').textContent=d.l;
+  const dd=document.getElementById('dd');
+  dd.innerHTML=d.n;
+  dd.style.color=d.c;
+  dd.style.textShadow='0 0 20px '+d.c+'88';
+  document.getElementById('detail').style.borderColor=d.c+'38';
+  const body=document.getElementById('db');
+  body.innerHTML=d.t.map(p=>'<p>'+p+'</p>').join('');
+  const isWide=window.innerWidth>=620;
+  body.style.columns=isWide?'2':'1';
+  body.style.columnGap=isWide?'28px':'0';
+  const det=document.getElementById('detail');
+  det.classList.add('open');
+  cur=i;
+  setTimeout(()=>det.scrollIntoView({behavior:'smooth',block:'nearest'}),55);
+}
+
+function cls(){
+  document.getElementById('detail').classList.remove('open');
+  if(cur){document.getElementById('p'+cur).classList.remove('active');cur=null;}
+}
+
+const st=document.getElementById('stars');
+for(let i=0;i<70;i++){
+  const s=document.createElement('div');s.className='star';
+  const sz=Math.random()*2.4+.4;
+  s.style.cssText='width:'+sz+'px;height:'+sz+'px;top:'+Math.random()*100+'%;left:'+Math.random()*100+'%;animation-duration:'+(Math.random()*4+2)+'s;animation-delay:'+(Math.random()*6)+'s;opacity:'+(Math.random()*.35+.08);
+  st.appendChild(s);
+}
+</script>
